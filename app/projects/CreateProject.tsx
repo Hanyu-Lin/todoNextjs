@@ -14,6 +14,7 @@ function CreateList() {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault;
+    setIsDisabled(true);
     try {
       const body = { projectName };
       await fetch("/api/projects/addProject", {
@@ -24,6 +25,7 @@ function CreateList() {
     } catch (error) {
       console.log(error);
     }
+    setIsDisabled(false);
   };
 
   return (
