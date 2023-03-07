@@ -6,11 +6,10 @@ interface InputProps {
 
 export const createTodo = async (projectId: string, name: string) => {
   try {
-    const response = await fetch(`../api/projects/${projectId}`, {
+    const response = await fetch(`/api/projects/${projectId}`, {
       method: "POST",
       body: JSON.stringify({ name }),
     });
-    console.log(response);
     return response.json();
   } catch (error) {
     console.log(error);
