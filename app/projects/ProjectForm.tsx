@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-function CreateProject() {
+function ProjectForm() {
   const [projectName, setprojectName] = useState("");
   const [isFetching, setIsFetching] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -69,4 +69,4 @@ function CreateProject() {
   );
 }
 
-export default CreateProject;
+export default ProjectForm;

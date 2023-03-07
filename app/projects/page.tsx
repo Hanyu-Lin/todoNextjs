@@ -1,5 +1,5 @@
 import React from "react";
-import CreateProject from "./CreateProject";
+import ProjectForm from "./ProjectForm";
 import { getProjects } from "@/lib/getAllProjects";
 import Project from "./components/Project";
 
@@ -12,7 +12,7 @@ async function AllTodos() {
   return (
     <div>
       <p>View list</p>
-      <CreateProject></CreateProject>
+      <ProjectForm></ProjectForm>
       <div>
         {projects?.map((project) => (
           <Project
