@@ -11,16 +11,17 @@ datasource db {
 }
 
 model Projects {
-  id    String  @id @default(cuid())
-  name  String?
-  tasks Tasks[]
+  id        String   @id @default(cuid())
+  name      String?
+  createdAt DateTime @default(now())
+  tasks     Tasks[]
 }
 
 model Tasks {
-  id                String    @id @default(cuid())
-  name              String?
-  completedDateTime DateTime?
-  order             Int?
-  project           Projects  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId         String
+  id        String   @id @default(cuid())
+  name      String?
+  completed Boolean
+  reatedAt  DateTime @default(now())
+  project   Projects @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
 }

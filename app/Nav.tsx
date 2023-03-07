@@ -11,7 +11,7 @@ function Nav() {
         <li>
           <Link
             className="text-white bg-gray-500 hover:bg-gray-500/70 p-3 rounded-lg"
-            href={"/todo"}
+            href={"/projects"}
           >
             All projects
           </Link>

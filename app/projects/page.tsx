@@ -2,6 +2,9 @@ import React from "react";
 import CreateProject from "./CreateProject";
 import { getProjects } from "@/lib/getAllProjects";
 
+export const dynamic = "force-dynamic",
+  revalidate = 0;
+
 async function AllTodos() {
   const { projects, error } = await getProjects();
   if (error) return error;

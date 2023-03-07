@@ -1,9 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 
-function CreateList() {
+function CreateProject() {
   const [projectName, setprojectName] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const isDisabled = isFetching || isPending;
   const handleTextInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -12,12 +16,13 @@ function CreateList() {
       setprojectName(value);
     }
   };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault;
-    setIsDisabled(true);
+    e.preventDefault();
+    setIsFetching(true);
     try {
       const body = { projectName };
-      await fetch("/api/projects/addProject", {
+      await fetch("/api/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -25,7 +30,13 @@ function CreateList() {
     } catch (error) {
       console.log(error);
     }
-    setIsDisabled(false);
+    startTransition(() => {
+      // Refresh the current route and fetch new data from the server without
+      // losing client-side browser or React state.
+      router.refresh();
+    });
+    setIsFetching(false);
+    setprojectName("");
   };
 
   return (
@@ -58,4 +69,4 @@ function CreateList() {
   );
 }
 
-export default CreateList;
+export default CreateProject;
