@@ -9,7 +9,7 @@ async function projectDetails({ params }: { params: { id: string } }) {
   return (
     <div>
       <h1>{project?.name}</h1>
-      <TaskList tasks={project?.tasks!}></TaskList>
+      <TaskList projectId={params.id}></TaskList>
     </div>
   );
 }
