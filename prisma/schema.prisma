@@ -21,7 +21,7 @@ model Tasks {
   id        String   @id @default(cuid())
   name      String?
   completed Boolean
-  reatedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
   project   Projects @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String
 }
