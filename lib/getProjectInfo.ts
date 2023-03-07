@@ -5,15 +5,6 @@ export async function getProjectInfo(id: string) {
       where: {
         id,
       },
-      include: {
-        tasks: {
-          select: {
-            id: true,
-            name: true,
-            completed: true,
-          },
-        },
-      },
     });
     return { project };
   } catch (error) {
