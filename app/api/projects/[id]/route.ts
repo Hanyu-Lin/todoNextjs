@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 //CRUD endpoint for tasks in a specific project
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
-    const project = await prisma.projects.findUnique({
+    const tasks = await prisma.projects.findUnique({
       where: {
         id: params.id,
       },
@@ -19,7 +22,7 @@ export async function GET({ params }: { params: { id: string } }) {
         },
       },
     });
-    return NextResponse.json(project, { status: 200 });
+    return NextResponse.json(tasks, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { err: "A error has occured when fetching the project" },
@@ -32,8 +35,8 @@ export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { name } = await request.json();
   console.log("received");
+  const { name } = await request.json();
   try {
     //check if project exists
     const project = await prisma.projects.findUnique({
@@ -44,7 +47,8 @@ export async function POST(
     if (!project) {
       return NextResponse.json({ err: "Wrong project id" }, { status: 400 });
     }
-    const result = await prisma.tasks.create({
+    console.log("project good");
+    const task = await prisma.tasks.create({
       data: {
         name,
         completed: false,
@@ -53,7 +57,8 @@ export async function POST(
         },
       },
     });
-    return NextResponse.json(result, { status: 200 });
+    console.log(task);
+    return NextResponse.json(task, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { err: "A error has occured when making a task" },
