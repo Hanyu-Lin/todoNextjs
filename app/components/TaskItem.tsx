@@ -31,13 +31,25 @@ function TaskItem({ id, name, completed, projectId }: Task) {
     }
   };
   return (
-    <li>
-      <label>
-        <input type="checkbox" checked={isCompleted} onChange={toggleTodo} />
-        {name}
+    <li className="flex justify-between items-center py-2 px-4 border-b border-gray-300">
+      <label className="flex items-center">
+        <input
+          type="checkbox"
+          checked={isCompleted}
+          onChange={toggleTodo}
+          className="mr-2"
+        />
+        <span className={isCompleted ? "line-through text-gray-500" : ""}>
+          {name}
+        </span>
       </label>
 
-      <button onClick={deleteTodo}>✕</button>
+      <button
+        onClick={deleteTodo}
+        className="text-red-500 hover:text-red-600 focus:outline-none"
+      >
+        ✕
+      </button>
     </li>
   );
 }

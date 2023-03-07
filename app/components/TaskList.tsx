@@ -26,7 +26,7 @@ function Tasklist({ projectId }: TasksProps) {
     <div>
       <p>{`tasks: ${data?.tasks ? data?.tasks.length : 0}`}</p>
       <AddTaskInput projectId={projectId}></AddTaskInput>
-      <ul>
+      <ul className="max-w-sm mx-auto">
         {data?.tasks &&
           data?.tasks.map((task) => (
             <TaskItem

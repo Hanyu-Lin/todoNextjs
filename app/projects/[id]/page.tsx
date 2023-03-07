@@ -8,7 +8,7 @@ async function projectDetails({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <h1>{project?.name}</h1>
+      <h1 className="text-3xl">{project?.name}</h1>
       <TaskList projectId={params.id}></TaskList>
     </div>
   );
