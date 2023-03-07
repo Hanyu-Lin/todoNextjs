@@ -1,18 +1,16 @@
 import React from "react";
+import AddTaskInput from "./AddTaskInput";
 import TaskItem from "./TaskItem";
-
+import { Task } from "../../lib/types";
 interface TasksProps {
-  tasks: {
-    id: string;
-    name: string | null;
-    completed: boolean;
-  }[];
+  tasks: Task[];
 }
 
 function Tasklist({ tasks }: TasksProps) {
   return (
     <div>
       <p>{`tasks: ${tasks ? tasks.length : 0}`}</p>
+      <AddTaskInput></AddTaskInput>
       <ul>
         {tasks &&
           tasks.map((task) => (

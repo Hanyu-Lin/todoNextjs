@@ -1,12 +1,7 @@
 "use client";
 import React from "react";
-
-interface TaskItemProp {
-  id: string;
-  name: string | null;
-  completed: boolean;
-}
-function TaskItem({ id, name, completed }: TaskItemProp) {
+import { Task } from "../../lib/types";
+function TaskItem({ id, name, completed }: Task) {
   const toggleTodo = async (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("todo");
   };
