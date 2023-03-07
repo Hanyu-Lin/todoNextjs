@@ -1,6 +1,7 @@
 import React from "react";
 import CreateProject from "./CreateProject";
 import { getProjects } from "@/lib/getAllProjects";
+import Project from "./components/Project";
 
 export const dynamic = "force-dynamic",
   revalidate = 0;
@@ -12,13 +13,15 @@ async function AllTodos() {
     <div>
       <p>View list</p>
       <CreateProject></CreateProject>
-      <ul>
+      <div>
         {projects?.map((project) => (
-          <li className="w-full flex justify-between mb-5" key={project.id}>
-            {project.name}
-          </li>
+          <Project
+            key={project.id}
+            id={project.id}
+            name={project.name}
+          ></Project>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

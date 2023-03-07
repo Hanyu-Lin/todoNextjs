@@ -1,4 +1,4 @@
-import { getProjectInfo } from "@/lib/getProject";
+import { getProjectInfo } from "@/lib/getProjectInfo";
 import React from "react";
 
 async function projectDetails({ params }: { params: { id: string } }) {
@@ -11,7 +11,6 @@ async function projectDetails({ params }: { params: { id: string } }) {
       <ul>
         {project?.tasks.map((task) => (
           <li key={task.id}>
-            <p>{task.completedDateTime?.toLocaleDateString()}</p>
             <p>{task.name}</p>
           </li>
         ))}

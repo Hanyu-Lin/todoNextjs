@@ -29,3 +29,20 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  const { id } = await request.json();
+  try {
+    const result = await prisma.projects.delete({
+      where: {
+        id,
+      },
+    });
+    return NextResponse.json(result, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { err: "A error has occured when making a post" },
+      { status: 500 }
+    );
+  }
+}
