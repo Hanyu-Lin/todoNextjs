@@ -1,9 +1,11 @@
 import React from "react";
+import TaskItem from "./TaskItem";
 
 interface TasksProps {
   tasks: {
     id: string;
-    name: string;
+    name: string | null;
+    completed: boolean;
   }[];
 }
 
@@ -11,7 +13,17 @@ function Tasklist({ tasks }: TasksProps) {
   return (
     <div>
       <p>{`tasks: ${tasks ? tasks.length : 0}`}</p>
-      <div>{tasks && tasks.map((task) => <p>{task.name}</p>)}</div>
+      <ul>
+        {tasks &&
+          tasks.map((task) => (
+            <TaskItem
+              key={task.id}
+              id={task.id}
+              name={task.name}
+              completed={task.completed}
+            ></TaskItem>
+          ))}
+      </ul>
     </div>
   );
 }

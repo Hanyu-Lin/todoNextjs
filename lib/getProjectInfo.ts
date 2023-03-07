@@ -6,7 +6,13 @@ export async function getProjectInfo(id: string) {
         id,
       },
       include: {
-        tasks: true,
+        tasks: {
+          select: {
+            id: true,
+            name: true,
+            completed: true,
+          },
+        },
       },
     });
     return { project };
