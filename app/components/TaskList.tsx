@@ -29,13 +29,7 @@ function Tasklist({ projectId }: TasksProps) {
       <ul className="max-w-sm mx-auto">
         {data?.tasks &&
           data?.tasks.map((task) => (
-            <TaskItem
-              key={task.id}
-              id={task.id}
-              name={task.name}
-              completed={task.completed}
-              projectId={task.projectId}
-            ></TaskItem>
+            <TaskItem key={task.id} {...task}></TaskItem>
           ))}
       </ul>
     </div>

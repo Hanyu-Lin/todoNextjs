@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { Task } from "../../lib/types";
-function TaskItem({ id, name, completed, projectId }: Task) {
-  const [isCompleted, setIsCompleted] = useState<boolean>(completed);
+function TaskItem(task: Task) {
+  const [isCompleted, setIsCompleted] = useState<boolean>(task.completed);
+
   const toggleTodo = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const body = { id: id, completed: !isCompleted };
+    const body = { id: task.id, completed: !isCompleted };
     try {
-      const response = await fetch(`/api/projects/${projectId}`, {
+      const response = await fetch(`/api/projects/${task.projectId}`, {
         method: "PUT",
         body: JSON.stringify(body),
       });
@@ -16,12 +17,13 @@ function TaskItem({ id, name, completed, projectId }: Task) {
       console.log(error);
     }
   };
+
   const deleteTodo = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    const body = { id };
+    const body = { id: task.id };
     try {
-      const response = await fetch(`/api/projects/${projectId}`, {
+      const response = await fetch(`/api/projects/${task.projectId}`, {
         method: "DELETE",
         body: JSON.stringify(body),
       });
@@ -40,7 +42,7 @@ function TaskItem({ id, name, completed, projectId }: Task) {
           className="mr-2"
         />
         <span className={isCompleted ? "line-through text-gray-500" : ""}>
-          {name}
+          {task.name}
         </span>
       </label>
 
