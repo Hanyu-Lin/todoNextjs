@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import toast from "react-hot-toast";
 
 function ProjectForm() {
   const [projectName, setprojectName] = useState("");
@@ -8,6 +9,8 @@ function ProjectForm() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const isDisabled = isFetching || isPending;
+  let toaster: string;
+
   const handleTextInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -20,16 +23,10 @@ function ProjectForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsFetching(true);
-    try {
-      const body = { projectName };
-      await fetch("/api/projects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    toaster = toast.loading("Creating...", {
+      id: toaster,
+    });
+    await createProject();
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
       // losing client-side browser or React state.
@@ -37,6 +34,22 @@ function ProjectForm() {
     });
     setIsFetching(false);
     setprojectName("");
+  };
+
+  const createProject = async () => {
+    try {
+      const body = { projectName };
+      await fetch("/api/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      toast.success("Project created", { id: toaster });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message, { id: toaster });
+      }
+    }
   };
 
   return (
