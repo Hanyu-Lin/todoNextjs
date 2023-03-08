@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectForm from "./ProjectForm";
+import ProjectForm from "./components/ProjectForm";
 import { getProjects } from "@/lib/getAllProjects";
 import Project from "./components/Project";
 

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import useSWR from "swr";
-import Project from "./components/Project";
+import Project from "./Project";
 
 interface Project {
   id: string;
