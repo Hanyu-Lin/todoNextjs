@@ -39,11 +39,15 @@ function ProjectForm() {
   const createProject = async () => {
     try {
       const body = { projectName };
-      await fetch("/api/projects", {
+      const response = await fetch("/api/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+      if (!response.ok) {
+        const { err } = await response.json();
+        throw new Error(err || "Failed to create a project");
+      }
       toast.success("Project created", { id: toaster });
     } catch (error) {
       if (error instanceof Error) {
