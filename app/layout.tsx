@@ -1,3 +1,4 @@
+import ToasterProvider from "./components/ToasterProvider";
 import "./globals.css";
 import Nav from "./Nav";
 
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="mx-4 md:mx-48 lg:mx-96">
         <Nav />
+        <ToasterProvider />
         {children}
       </body>
     </html>
