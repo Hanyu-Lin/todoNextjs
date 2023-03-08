@@ -30,9 +30,13 @@ export async function GET(
             completed: true,
             projectId: true,
           },
+          orderBy: {
+            createdAt: "desc",
+          },
         },
       },
     });
+
     return NextResponse.json(tasks, { status: 200 });
   } catch (error) {
     return NextResponse.json(
