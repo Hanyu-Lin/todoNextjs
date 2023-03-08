@@ -1,6 +1,19 @@
 import TaskList from "@/app/components/TaskList";
 import { getProjectInfo } from "@/lib/getProjectInfo";
 import React from "react";
+import { getProjects } from "@/lib/getAllProjects";
+
+export async function generateStaticParams() {
+  const { projects, error } = await getProjects();
+
+  if (projects) {
+    return projects!.map((project) => ({
+      id: project.id,
+    }));
+  } else {
+    return [];
+  }
+}
 
 async function projectDetails({ params }: { params: { id: string } }) {
   const { project, error } = await getProjectInfo(params.id);
