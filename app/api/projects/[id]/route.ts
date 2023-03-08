@@ -40,7 +40,7 @@ export async function GET(
     return NextResponse.json(tasks, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { err: "A error has occured when fetching the project" },
+      { err: "A error has occured when fetching the tasks" },
       { status: 500 }
     );
   }
@@ -65,7 +65,7 @@ export async function POST(
     return NextResponse.json(task, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { err: "A error has occured when making a task" },
+      { err: "A error has occured when creating the task" },
       { status: 500 }
     );
   }

@@ -8,7 +8,7 @@ export async function GET() {
     return NextResponse.json(projects, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { err: "A error has occured when making a post" },
+      { err: "A error has occured when fetching all projects" },
       { status: 500 }
     );
   }
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { err: "A error has occured when making a post" },
+      { err: "An error has occured when creating the project" },
       { status: 500 }
     );
   }
@@ -41,7 +41,7 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { err: "A error has occured when making a post" },
+      { err: "An error has occured when deleting the project" },
       { status: 500 }
     );
   }
